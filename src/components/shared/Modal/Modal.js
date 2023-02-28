@@ -6,12 +6,6 @@ import css from './Modal.module.css';
 const modalRoot = document.getElementById('modal-root');
 
 export function Modal(props) {
-  const handleKeydown = e => {
-    if (e.code === 'Escape') {
-      props.onClose();
-    }
-  };
-
   const handleClickBackdrop = evt => {
     if (evt.currentTarget === evt.target) {
       props.onClose();
@@ -19,12 +13,18 @@ export function Modal(props) {
   };
 
   useEffect(() => {
+    const handleKeydown = e => {
+      if (e.code === 'Escape') {
+        props.onClose();
+      }
+    };
+
     window.addEventListener('keydown', handleKeydown);
 
     return () => {
       window.removeEventListener('keydown', handleKeydown);
     };
-  }, [handleKeydown]);
+  }, [props]);
 
   return createPortal(
     <div className={css.overlay} onClick={handleClickBackdrop}>
