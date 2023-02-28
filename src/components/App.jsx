@@ -18,7 +18,7 @@ function App() {
   const [showModal, setShowModal] = useState(false);
 
   const toggleModal = () => {
-    setShowModal(!showModal);
+    setShowModal(prevShowModal => !prevShowModal);
   };
 
   const largeImage = (imgUrl) => {
